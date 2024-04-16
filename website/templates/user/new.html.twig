@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New User{% endblock %}
+
+{% block body %}
+
+    <div id="content">
+        <div class="container">
+            <div class="classic_form">
+                <h2>Créer un nouvel utilisateur</h2>
+                {{ include('user/_form.html.twig') }}
+            </div>
+        </div>
+    </div>
+
+    <div class="bottom_content">
+        {% if is_granted('ROLE_ADMIN') %}
+            <a class="main_btn small" href="{{ path('app_user_index') }}">Retour liste</a>
+        {% endif %}
+    </div>
+{% endblock %}

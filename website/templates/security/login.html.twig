@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block body %}
+<div class="container">
+
+<div class="classic_form">
+
+    <form method="post" class="login_post">
+
+      <h2 class="">Connexion</h2>
+      <div>
+        <label for="inputEmail">Email</label>
+        <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" autofocus title="Veuillez saisir une adresse e-mail valide">
+      </div>
+
+      <div>
+        <label for="inputPassword">Mot de passe</label>
+        <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password">
+      </div>
+
+      <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+      <div class="checkbox mb-3">
+        <label>
+          <input type="checkbox" name="_remember_me"> Se souvernir de moi
+        </label>
+      </div>
+
+      <div class="submit_zone">
+        <button class="main_btn btn btn-lg btn-primary" type="submit">
+          Se connecter
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

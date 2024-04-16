@@ -1,0 +1,84 @@
+// Bloc qui contient toutes les notifications
+
+.notifications{
+    position: absolute;
+    width: 100%;
+    margin: 1rem auto;
+    align-items: center;
+
+    .notifications_zone{
+        margin: auto;
+        width: 50rem;
+        cursor: pointer;
+    }
+
+    div{
+        margin-bottom: 0.4rem;
+    }
+
+    .content_message{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .close_message{
+        opacity: 1;
+        transition: opacity 0.5s;
+    }
+
+    .close_message img{
+        max-width: 10px;
+        max-height: 10px;
+    }
+}
+
+.notifications.fade-out{
+    animation: fadeOut 0.3s ease-in-out;
+    animation-fill-mode: forwards;
+}
+
+// Block de notification standard
+
+.success_message{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(133, 255, 117);
+    padding: 8px 40px;
+    height: 3rem;
+    border-radius: 4px;
+    border: 2px solid rgb(30, 255, 0);
+
+    .validation_icon_message{
+        max-width: 25px;
+        max-height: 25px;
+        margin-right: 10px;
+    }
+}
+
+.error_message{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(255, 117, 117);
+    padding: 8px 40px;
+    height: 3rem;
+    border-radius: 4px;
+    border: 2px solid rgb(255, 30, 0);
+
+    .validation_icon_message{
+        max-width: 25px;
+        max-height: 25px;
+        margin-right: 10px;
+    }
+}
+
+// keyframes
+
+@keyframes fadeOut {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+}

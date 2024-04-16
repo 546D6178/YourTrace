@@ -1,0 +1,18 @@
+{{ form_start(form) }}
+
+        {{ form_row(form.email) }}
+        {{ form_row(form.username) }}
+        {{ form_row(form.name) }}
+        {{ form_row(form.surname) }}
+        {{ form_row(form.birthdate) }}
+        {{ form_row(form.address) }}
+        {{ form_row(form.phone_number) }}
+        {{ form_row(form.plainPassword, {
+                label: 'Password'
+        }) }}
+
+        <div class="bottom_content">
+                <button class="main_btn">{{ button_label|default('Save') }}</button>
+        </div>
+
+{{ form_end(form) }}

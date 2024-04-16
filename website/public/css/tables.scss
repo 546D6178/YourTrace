@@ -1,0 +1,45 @@
+.table{
+  margin-bottom: 2rem;
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  tr{
+    border-radius: 5px 5px 0 0;
+  }
+  th{
+    color: #fff;
+    background : var(--main-color);
+    padding: 2rem 1rem 1rem;
+    text-align: center;
+    font-weight: 900;
+  }
+  td{
+    padding: 1rem;
+    border-bottom: 1px solid #f2f2f2;
+  }
+  tr:nth-child(odd) {
+    background-color: #f2f2f2; /* Gris clair pour les lignes impaires */
+  }
+  
+  tr:nth-child(even) {
+    background-color: #ffffff; /* Blanc pour les lignes paires */
+  }
+  td th{
+    border: 1px solid #dddddd;
+  }
+}
+
+.user_profile{
+  th{
+    text-align: left;
+  }
+}
+
+.bottom_content{
+  display: flex;
+  justify-content: center;
+}
+
+.bottom_content a, .bottom_content button{
+  margin-right: 1rem;
+}

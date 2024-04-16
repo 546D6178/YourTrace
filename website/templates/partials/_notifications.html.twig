@@ -1,0 +1,28 @@
+<ul class="notifications" onclick="fadeOutElement(this);">
+    <div class="notifications_zone">
+
+        {% for message in app.session.flashBag.get('success') %}
+            <div class="success_message mb-3">
+                <div class="content_message">
+                    <img class="validation_icon_message" src="{{ asset("img/validation.svg") }}" />
+                    <p>{{message}}<p>
+                </div>
+                <div>
+                    <a href="#" class="close_message"><img src="{{ asset("img/croix.png") }}" alt="croix fermeture de notification" /></a>
+                </div>
+            </div>
+        {% endfor %}
+
+        {% for message in app.session.flashBag.get('error') %}
+            <div class="error_message mb-3">
+                <div class="content_message">
+                    <img class="validation_icon_message" src="{{ asset("img/error.png") }}" />
+                    <p>{{message}}<p>
+                </div>
+                <div>
+                    <a href="#" class="close_message"><img src="{{ asset("img/croix.png") }}" alt="croix fermeture de notification" /></a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</ul>

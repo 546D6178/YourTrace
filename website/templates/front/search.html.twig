@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Recherche Yourtrace{% endblock %}
+
+{% block stylesheets %}
+{% endblock %}
+{% block bodyClass %}search_page{% endblock%}
+{% block body %}
+<section class="title_content dark_bloc">
+  <div class="container">
+    <h1>Ma recherche</h1>
+    <div>
+      <h2 class="username">{{user.name|capitalize}} {{user.surname|capitalize}}</h2>
+    </div>
+  </div>
+</section>
+
+  <section class="criteria_content">
+    <div class="container">
+
+      <div>
+        <h2>Critères :</h2>
+        <p class="desc">Vous pouvez désélectionner les critères sur lesquels vous ne souhaitez pas effectuer de recherche.</p>
+      </div>
+      <div id="criterias">
+        <form method="post" id="osint_search" action="{{ path('app_api_search', {'id': user.id}) }}">        
+          <input type="checkbox" id="name" class="toggle-checkbox" checked="checked" value="name" />
+          <label for="name" class="toggle-label main_btn small">Nom / prénom</label>
+          <input type="checkbox" id="email" class="toggle-checkbox" checked="checked" value="email"/>
+          <label for="email" class="toggle-label main_btn small">Email</label>
+          <input type="checkbox" id="tel" class="toggle-checkbox" checked="checked" value="tel"/>
+          <label for="tel" class="toggle-label main_btn small">Numéro de téléphone</label>
+          <input type="checkbox" id="address" class="toggle-checkbox" checked="checked" value="address"/>
+          <label for="address" class="toggle-label main_btn small">Adresse postale</label>
+          <input type="checkbox" id="pseudonyme" class="toggle-checkbox" checked="checked" value="pseudonyme"/>
+          <label for="pseudonyme" class="toggle-label main_btn small">Pseudonyme</label>
+      </div>
+      <div>
+        <input type="hidden" name="_token" value="{{ csrf_token('search' ~ user.id) }}">
+        <button class="search_cta"><img src="{{asset("/img/search.svg") }}" class="main_btn" alt="Icône de loupe">Lancer la recherche </button>
+        </form>
+      </div>
+      </form>
+    </div>
+  </section>
+
+  <section id="results_content">
+    <div class="container" >
+
+      <h2>Résultats :</h2>
+      <button class="main_btn small" id="cancel_button">Interrompre</button>
+      <div id="tree_content">
+        <span id="loader"></span>
+        <ul class="tree" id="results">
+        </ul>
+      </div>
+    </div>
+  </section>
+</div>
+{% endblock %}
+{% block javascripts %}
+<script src="{{ asset("js/search.js") }}"></script>
+{% endblock %}

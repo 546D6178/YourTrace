@@ -1,0 +1,163 @@
+//sass --watch public/css/main.scss:public/css/main.css --style=compressed
+@import "fonts";
+@import "colors";
+
+body{
+  font-size: 16px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  font-family : 'Montserrat', sans-serif;
+  //background: radial-gradient(#b067bee5, #7089dbdc);
+}
+
+p, input{
+  font-size: 1.1rem;
+  color: var(--dark-text);
+  line-height: 1.5;
+}
+
+h1{
+  color: var(--main-color);
+  font-size: 3rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+h2{
+  color: var(--main-color);
+  font-size: 2rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+::selection{
+  background-color: var(--main-color);
+  color: white;
+}
+
+header{
+  text-align: center;
+  background-color: var(--main-color);
+  color: white;
+  display: flex;
+
+  .menu{
+    width: 100%;
+    display: flex;
+    justify-content : space-between;
+
+  }
+  ul{
+    display: flex;
+    font-weight: 600;
+  }
+  li{
+    &:not(last-child){
+    }
+    a{
+      padding: .5rem .7rem;
+      display: block;
+      height: 100%;
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      transition: .3s ease-in-out;
+      &:hover{
+        background-color: var(--main-lighter);
+      }
+    }
+  }
+}
+
+.container{
+  padding : 0 1rem;
+  margin: auto;
+  width: 100%;
+  max-width: 1600px;
+}
+
+#content
+{
+    width: 60rem;
+    margin: auto;
+}
+
+strong {
+  font-weight: bold;
+}
+
+.container{
+  padding: 1rem;
+  max-width: 1980px;
+  margin: auto;
+}
+
+#home_logo {
+  img{
+    max-height: 3.6rem;
+    width : 3.5rem;
+    padding: .5rem;
+  }
+}
+
+button{
+  cursor: pointer;
+}
+
+
+
+.main_btn{
+  font-size: 1.4rem;
+  font-weight: 600;
+  border-radius: 5px;
+  padding: .6rem 1.2rem;
+  display: inline-block;
+  background-color: var(--main-color);
+  color: #fff;
+  box-shadow: var(--light-shadow);
+  border: 2px solid var(--main-lighter);
+  width: fit-content;
+  transition: .3s ease-in-out;
+  transition: transform .2s ease-in-out;
+
+  &:hover{
+    background-color: var(--main-lighter);
+    transform: translateY(-0.2rem);
+    transition: .2s ease-in-out;
+  }
+
+  &.small{
+    font-size: 1rem;
+    padding: .3rem .6rem
+  }
+}
+
+footer
+{
+  margin-top: 2rem;
+  width: 100%;
+  background-color: var(--main-darker);
+  padding: 4rem 0rem;
+  font-size: 1.3rem;
+  color: #fff;
+  
+  .container{
+    display: flex;
+    justify-content: space-around;
+  }
+  ul{
+    line-height: 2;
+  }
+}
+
+@import "home";
+@import "forms";
+@import "tables";
+@import "search";
+@import "tree";
+@import "notifications";
+@import "animations";
+
+@import "small_screens";

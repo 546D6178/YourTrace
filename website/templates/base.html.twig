@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8">
+    <title>{% block title %}YourTrace{% endblock %}</title>
+    <link rel="shortcut icon" href="{{ asset("/img/yourtrace_icon.svg") }}" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ asset("/css/reset.css") }}">
+    <link rel="stylesheet" href="{{ asset("/css/main.css") }}">
+    {% block stylesheets %}
+    {% endblock %}
+
+  </head>
+  <body class="{% block bodyClass %}{% endblock %}">
+    <header>
+      <a href="/" id="home_logo"><img src="{{asset("/img/yourtrace_icon_white.svg")}}" alt="yourtrace white"></a>
+
+      <div class="menu">
+        <ul>
+          <li><a href="/a-propos">A propos</a></li>
+          <li><a href="/didacticiel">Didacticiel</a></li>
+          {% if is_granted('IS_AUTHENTICATED_FULLY') or is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+          <li><a href="{{path('app_search_request', {'id' : app.user.id})}}">Ma recherche</a></li>
+          {% endif %}
+        </ul>
+
+        <ul>
+          {% if is_granted('IS_AUTHENTICATED_FULLY') or is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+          <li><a href="{{path('app_user_show', {'id' : app.user.id})}}">Profil</a></li> 
+          <li><a href="/logout">Déconnexion</a></li> 
+          {% if is_granted('ROLE_ADMIN') %}
+          <li><a href="/dashboard">Administration</a></li> 
+          {% endif %}
+          {% else %}
+          <li><a href="/login">Connexion</a></li>
+          <li><a href="/register">Inscription</a></li>
+          {% endif %}
+        </ul>
+      </div>
+
+      {% block header %}{% endblock %}
+    </header>
+
+    {% include "/partials/_notifications.html.twig" %}
+
+    {% block body %}
+
+    {% endblock %}
+
+    <footer>
+      <div class="container">
+        <ul>
+          <li><a href="">Contact</a></li>
+          <li><a href="/mentions-legales">Mentions légales</a></li>
+        </ul>
+        {% block footer %}{% endblock %}
+      </div>
+    </footer>
+    <script src="{{ asset("js/main.js") }}"></script>
+    {% block javascripts %}
+    {% endblock %}
+  </body>
+
+</html>

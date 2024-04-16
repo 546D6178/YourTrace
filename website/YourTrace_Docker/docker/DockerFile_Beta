@@ -1,0 +1,41 @@
+FROM ubuntu:latest
+
+# Set non-interactive mode for package installation
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Update and upgrade packages
+RUN apt-get update -y \
+    && apt-get upgrade -y
+
+# Install Apache and PHP and its dependencies
+RUN apt-get install -y apache2 \
+    php8.1 \
+    php-dev \
+    php-mysql \
+    libapache2-mod-php \
+    php-curl \
+    php-json \
+    php-xml \
+    php-common \
+    php-mbstring
+
+# Install Composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+RUN curl -1sLf 'https://dl.cloudsmith.io/public/symfony/stable/setup.deb.sh' | bash
+
+# Create folder yourtrace
+WORKDIR /yourtrace
+COPY . .
+
+# Install dependencies
+CMD ["composer", "install"]
+
+# Install symfony (needed to be after)
+RUN apt install symfony-cli -y
+
+# Start Symfony
+EXPOSE 8000
+CMD ["symfony", "server:start"]
+
+#Start Shell
+CMD ["/bin/bash"]

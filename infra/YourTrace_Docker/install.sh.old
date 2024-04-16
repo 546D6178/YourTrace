@@ -1,0 +1,99 @@
+#!/bin/bash
+
+red='\033[0;31m'
+reset='\033[0m'
+green='\033[0;32m'
+
+if ls /usr/bin/docker 1> /dev/null 2>&1 && ls /usr/bin/docker-compose 1> /dev/null 2>&1; then
+	echo -e "${green}Docker et Docker-compose OK${reset}"
+else
+	echo -e "${red}Veuillez installer docker et docker-compose${reset}"
+	exit 1
+fi
+
+dossier="../../website"
+
+if [ -d "$dossier" ]; then
+	echo -e "${green}Le dossier Website existe.${reset}"
+	read -p "Voulez-vous le mettre à jour ? ATTENTION CELA VA ECRASER VOS MODIFICATIONS ACTUELLES du dossier WEBSITE. Choisissez une branche (dev/main/no): " choice
+        if [ "$choice" = "dev" ]; then
+                # Actions à effectuer si l'utilisateur choisit "dev"
+                echo -e "${green} GIT CLONE PULL INCOMING from DEV .${reset}"
+                /bin/bash -c "cd ../../website/ && git checkout dev && git pull"
+		#git config --global http.https://44.211.92.107/.sslVerify false && \
+                #git clone --force https://44.211.92.107/yourtrace/website.git -b dev ../../website"
+                if [ $? -ne 0 ]; then
+                        echo -e "${red}La commande GIT a échouée. Sortie du script.${reset}"
+                        exit 1
+                fi
+        elif [ "$choice" = "main" ]; then
+                # Actions à effectuer si l'utilisateur choisit "main"
+                echo -e "${green} GIT PULL INCOMING from MAIN .${reset}"
+                /bin/bash -c "cd ../../website/ && git checkout main && git pull"
+		#git config --global http.https://44.211.92.107/.sslVerify false && \
+                #git clone --force https://44.211.92.107/yourtrace/website.git -b main ../../website
+                if [ $? -ne 0 ]; then
+                        echo -e "${red}La commande GIT a échouée. Sortie du script.${reset}"
+                        exit 1
+                fi
+        elif [ "$choice" = "no" ]; then
+                # Actions à effectuer si l'utilisateur choisit "no"
+                echo -e "${red}No ? Ok.${reset}"
+
+        else
+                # Actions à effectuer si l'utilisateur donne une réponse non attendue
+                echo -e "${red}yes or no ? not !d%f%bnhgjtyc please.${reset}"
+                exit 1
+        fi
+else
+	echo -e "${red}Le dossier Website est introuvable.${reset}"
+	read -p "Voulez-vous le créer ? (yes/no): " choice
+	if [ "$choice" = "yes" ]; then
+    		# Actions à effectuer si l'utilisateur choisit "yes"
+    		echo -e "${green} GIT CLONE INCOMING FROM MAIN .${reset}"
+		git config --global http.https://44.211.92.107/.sslVerify false && \
+		git clone https://44.211.92.107/yourtrace/website.git ../../website
+		if [ $? -ne 0 ]; then
+   			echo -e "${red}La commande GIT a échouée. Sortie du script.${reset}"
+    			exit 1
+		fi
+	elif [ "$choice" = "no" ]; then
+    		# Actions à effectuer si l'utilisateur choisit "no"
+    		echo -e "${red}No ? Ok bye.${reset}"
+		exit 1
+	else
+    		# Actions à effectuer si l'utilisateur donne une réponse non attendue
+    		echo -e "${red}Wrong choice ? not !d%f%$bnhgjty$c please.${reset}"
+		exit 1
+	fi
+fi
+
+cp "sample.env" ".env"
+
+echo -e "${green}Build des images.${reset}"
+
+docker-compose build #--no-cache
+
+if docker ps | grep -q YourTrace- ; then
+	#docker ps | grep YourTrace- | xargs docker stop  1>/dev/null 2>&1
+	echo -e "${green}Suppression des anciens conteneurs.${reset}"
+	docker ps -a | grep "YourTrace-" | awk '{print $1}' | xargs -I {} docker stop {}
+	docker ps -a | grep "YourTrace-" | awk '{print $1}' | xargs -I {} docker rm {}
+	docker-compose up -d --force-recreate
+else
+	docker-compose up -d
+fi
+
+if [ $(docker ps | grep "YourTrace-" | wc -l) = "6" ]; then
+
+	echo -e "\n${red}Attention${reset}, l'execution de ce script créer un volume de log dans ${red}/volumes_yourtrace/logs${reset}\n"
+	echo -e "${green}Voici les conteneurs de YourTrace ! : ${reset}\n"
+	echo -n "$(yes "═" | head -n ${COLUMNS}  | tr -d '\n')"
+	echo -e "\n"
+	docker ps | awk 'NR==1 || /YourTrace-/'
+	echo -e "\n"
+	echo -n "$(yes "═" | head -n ${COLUMNS}  | tr -d '\n')"
+	echo -e "\n${green}L'interface Web est accessible à http://localhost:8100${reset}"
+else
+	echo -e "${red}Un probleme s'est produit, l'un des conteneurs necessite plus d'attention${reset}" 
+fi 

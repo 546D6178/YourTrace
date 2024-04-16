@@ -1,0 +1,165 @@
+#criterias input
+{
+  display: none;
+}
+
+.criteria_content {
+  .desc{
+    margin-bottom : 2rem;
+  }
+
+  h2{
+    font-weight: 700;
+  }
+
+}
+
+.criteria_content #criterias
+{
+  width: 100%;
+  margin: 20px 0;
+}
+
+.criteria_content #criterias form
+{
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.title_content, .criteria_content
+{
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title_content div
+{
+  justify-content: space-around;
+}
+
+.title_content.dark_bloc
+{
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.title_content h1
+{
+  font-size: 4rem;
+  font-weight: 600;
+  color: #fff;
+  opacity: 60%;
+}
+
+.criteria_content div:first-child
+{
+  width: 100%;
+  align-items: flex-start;
+}
+
+.criteria_content .options
+{
+  margin: 0 0 20px 0;
+}
+
+.criteria_content .options a
+{
+  margin: 0 5px;
+}
+
+.subtitle
+{
+  color: var(--main-color);
+  font-size: 2rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+}
+
+.options div:first-child {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+
+.search_page{
+  .container{
+    max-width: 60rem;
+  }
+  .search_cta{
+    max-width: 20rem;
+    display: flex;
+    align-items: center;
+    grid-gap: 1rem;
+    color: var(--main-color);
+    width: 100%;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 3rem auto 1rem;
+    img{
+      max-height: 3.4rem;
+      max-width: 3.4rem;
+      padding: .4rem;    }
+  }
+
+  h2.username{
+    color: #fff;
+  }
+
+  /* Styles pour la checkbox */
+  .toggle-checkbox {
+    display: none;
+  }
+
+  /* Styles pour l'étiquette */
+  .toggle-label {
+    display: inline-block;
+    padding: 8px 16px;
+    // background-color: #eaeaea;
+    // color: #333;
+    cursor: pointer;
+  }
+
+  /* Styles pour l'étiquette lorsque la checkbox n'est pas cochée */
+  :not(.toggle-checkbox:checked) + .toggle-label {
+    background-color: #888;
+    border: 2px solid grey;
+    color: #fff;
+  }
+}
+
+#results_content{
+  opacity: 0;
+  transition: .5s ease-in-out;
+}
+
+#loader {
+  border: 24px solid;
+  border-color: rgba(255, 255, 255, 0.15) rgba(255, 255, 255, 0.25) rgba(255, 255, 255, 0.35) rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  display: none;
+  opacity: 0;
+  transition: .4s ease-in-out;
+  height: 3rem;
+  width: 3rem;
+  margin: auto;
+}
+
+#cancel_button {
+  display: none;
+  opacity: 0;
+}

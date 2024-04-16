@@ -1,0 +1,89 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+{% endblock %}
+
+{% block body %}
+<section class="hero">
+  <div class="container">
+    <div class="content">
+      <h1>Your <br>
+        Trace
+      </h1>
+      <hr>
+      <p>Gardez un oeil sur vos données personnelles</p>
+      <div class="wrapper">
+        <a class="main_btn" href="/didacticiel">Comment</a>
+        <a class="main_btn" href="/a-propos">Pourquoi</a>
+        {% if is_granted('IS_AUTHENTICATED_FULLY') or is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+        <a class="main_btn" href="{{path('app_search_request', {'id' : app.user.id})}}">Explorer</a>
+        {% else %}
+        <a class="main_btn" href="/login">Explorer</a>
+          {% endif %}
+      </div>
+    </div>
+    <img id="yourtrace_info" src="{{asset("/img/yourtrace_info.svg")}}" alt="yourtrace">
+  </div>
+</section>
+
+<section class="text light_bloc">
+  <div class="container">
+    <h2>Un outil pour retrouver facilement <br>
+      les informations en ligne qui vous concernent.</h2>
+    <p>
+    À l'ère numérique actuelle, notre présence sur internet laisse souvent des traces numériques 
+    disséminées à travers une multitude de plateformes et de services en ligne. Que ce soit des profils de réseaux 
+    sociaux, des publications, des commentaires ou d'autres formes de contenus, il peut être difficile de retrouver 
+    et de gérer toutes ces informations dispersées.</p>
+    <p>C'est pourquoi nous avons créé cet outil puissant et facile à 
+    utiliser, qui vous permettra de regrouper et d'accéder rapidement à l'ensemble de vos données en ligne.<br> 
+    Explorez notre site et découvrez comment vous pouvez reprendre le contrôle de votre identité 
+    numérique
+    </p>
+    <div class="wrapper">
+      <a class="main_btn" href="/login">Connexion</a>
+      <a class="main_btn" href="/register">Inscription</a>
+    </div>
+  </div>  
+</section>
+
+<section class="text dark_bloc">
+  <div class="frame">
+    <div class="container">
+      <h2>FAQ</h2>
+      <div class="fancy">
+      <p>
+      Exhalaret Constantium semper iurgiis Nisibi emergentes foveis exitialis semper ductor reclamans accitus anxius agitabantur 
+      certamina et litis certamina isdem obsecuturos litis exitialis obsecuturos cum dispicere ruinarum iunxerat qui quae bellicosus 
+      quam discriminis accusatores isdem sibi reclamans accusatores sed accusatores exhalaret.
+      </p>
+      <!--
+        <p>
+            <strong>1. Qu'est-ce que cet outil fait exactement ?</strong><br>
+            Notre outil est conçu pour vous aider à trouver et à rassembler facilement toutes les informations en ligne qui 
+            vous concernent. Il effectue une recherche exhaustive à travers diverses plateformes et sources de données sur 
+            internet, telles que les réseaux sociaux, les sites web, les forums, les blogs et bien d'autres encore. Il vous 
+            permet de centraliser toutes ces informations et de les visualiser dans un tableau de bord convivial.
+        </p>
+        <p>
+            <strong>2. Comment puis-je utiliser cet outil ?</strong><br>
+            Utiliser notre outil est simple et intuitif. Il vous suffit de créer un compte sur notre site web, puis de fournir 
+            les informations nécessaires pour lancer une recherche. Vous pouvez spécifier votre nom, votre adresse e-mail, votre 
+            numéro de téléphone et d'autres détails pertinents pour affiner les résultats. Notre algorithme performant 
+            analysera ensuite le web à la recherche de toutes les traces numériques vous concernant.
+        </p>
+        <p>
+            <strong>3. Est-ce que mes données personnelles sont en sécurité ?</strong><br>
+            La protection de vos données personnelles est notre priorité absolue. Nous mettons en place des mesures de sécurité 
+            robustes pour garantir la confidentialité et la protection de vos informations. Vos données sont cryptées et stockées 
+            de manière sécurisée. Nous ne partageons jamais vos informations avec des tiers sans votre consentement explicite.
+        </p>
+      </div>
+      -->
+      <div class="wrapper">
+        <a class="main_btn" href="" title="Foire aux questions">FAQ</a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

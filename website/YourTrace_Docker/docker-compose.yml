@@ -1,0 +1,113 @@
+version: '3.9'
+
+#This is a list of the netwokrs
+networks:
+  backend:
+    ipam:
+      config:
+        - subnet: 172.30.0.0/16
+
+    #This is a list of the services (containers) that you will be using to run whatever application you have written.
+services:
+
+  webserver:
+
+  #This is the build section of the Docker Compose file. This is where the docker-compose program will look if you use it's build
+    build:
+
+    #Context is the location of where your DockerFile resides on your local machine you are building the image from.
+      context: ./docker
+      dockerfile: webserver.Dockerfile
+
+    container_name: '${APP_NAME}-webserver'
+
+    #Restart can be set so if your container fails for some reason and exits, that the container will try and reboot itself.
+    restart: always
+
+    environment:
+      DATABASE_URL: 'mysql://${MYSQL_USER}:${MYSQL_PASS}@172.30.0.2:3306/${MYSQL_DB}'
+
+    #Ports are used when you want to publish ports and allow them to be accessed by computers or services outside
+    ports:
+      - '${APP_PORT_UNSECURE}:80'
+      - '${APP_PORT}:443'
+
+    #Volumes are how you mount your local filesystem to the filesystem inside your container. Works the same way as SMB works
+    volumes:
+      #- ./sample.env:/var/www/html/.env
+      - /volumes_yourtrace/website:/var/www/html
+      #- ./src/apache/sites-enabled:/etc/apache2/sites-enabled
+      #- ./src/php/php.ini:/usr/local/etc/php/php.ini
+      - /volumes_yourtrace/website/log/apache2:/var/log/apache2
+    links:
+      - database
+    depends_on:
+      database:
+        condition: service_healthy
+    networks:
+      backend
+        ipv4_address: 172.30.0.1
+
+
+#This is the start of the second container we have.
+  database:
+    build:
+      context: ./docker
+      dockerfile: database.Dockerfile
+    container_name: '${APP_NAME}-database'
+    restart: always
+    ports:
+      - '${DB_PORT}:3306'
+    #This environment section allows you to set environment variables within the container
+    environment:
+      MYSQL_ROOT_PASSWORD: '${MYSQL_ROOT_PASS}'
+      MYSQL_USER: '${MYSQL_USER}'
+      MYSQL_PASSWORD: '${MYSQL_PASS}'
+      MYSQL_DATABASE: '${MYSQL_DB}'
+    volumes:
+      - ./volumes/db:/var/lib/mysql
+    #  - ./src/mariadb/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./logs/mysql:/var/log/mysql
+    healthcheck:
+      test: mysqladmin ping -h 127.0.0.1 -u root --password=$$MYSQL_ROOT_PASSWORD
+      interval: 5s
+      retries: 5
+    networks:
+      backend
+        ipv4_address: 172.30.0.2
+
+  phpmyadmin:
+    build:
+      context: ./docker
+      dockerfile: php.Dockerfile
+    container_name: '${APP_NAME}-pma'
+    restart: always
+    ports:
+      - '${PHPADMIN_PORT}:80'
+    environment:
+      PMA_HOST: database
+      PMA_PORT: 3306
+      PMA_USER: ${MYSQL_USER}
+      PMA_PASSWORD: ${MYSQL_PASS}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASS}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASS}
+    depends_on:
+      database:
+        condition: service_healthy
+    volumes:
+      #- ./src/php/php.ini:/usr/local/etc/php/conf.d/php-phpmyadmin.ini
+    links:
+      - database
+    networks:
+      backend
+        ipv4_address: 172.30.0.3
+
+  redis:
+    container_name: '${APP_NAME}-redis'
+    image: redis:latest
+    networks:
+      backend
+        ipv4_address: 172.30.0.4
+    ports:
+      - '${HOST_MACHINE_REDIS_PORT}:6379'

@@ -1,0 +1,83 @@
+# Your Trace Docker
+
+Docker du projet YourTrace permettant le déploiement instantanné d'un serveur LAMP.
+
+## Requirements
+
+- Composer 2.2 >
+- Docker 23.0.1 >
+
+## Installation & Exécution
+	
+### Installation
+**[-> Composer <-](https://getcomposer.org/download/)**
+#### Docker
+#### Ubuntu/:
+- https://docs.docker.com/engine/install/ubuntu/
+#### Debian
+- https://docs.docker.com/engine/install/debian/
+#### Fedora
+-	https://docs.docker.com/engine/install/fedora/
+#### RHEL
+- https://docs.docker.com/engine/install/rhel/
+#### CentOS
+- https://docs.docker.com/engine/install/centos/
+
+
+Vous pouvez cloner ce répertoire sur votre ordinateur en utilisant la commande suivante :
+
+```bash
+git clone https://gitlab.yourtrace.com/yourtrace/infra.git
+```
+  
+### Exécution
+ 
+Une fois le répertoire cloné à l'emplacement de votre choix, exécutez les commandes suivantes pour démarrer le serveur :
+
+```bash
+cd infra/YourTrace_Docker
+cp sample.env .env ###Variables à customiser au préalable###
+docker compose build
+```
+### Exécution
+
+Une fois que le docker a installé toutes ses dépendances, il ne vous reste plus qu'à exécuter le docker avec la commande :
+
+```bash
+docker compose up -d
+```
+NB : Il y a un système de check du docker mariadb, s'assurer que le status de celui-ci soit bien **UP** et **Healthy**
+Une fois que les 3 dockers sont UP, il faudra se connecter en shell sur le docker Web afin de télécharger les dépendances via **composer** en utilisant la commande  
+```  
+docker compose exec YourTrace-webserver bash  
+composer install
+```   
+  
+  
+## Configuration
+Pour modifier les variables d'environnements, modifier votre fichier .env depuis la racine du projet.
+
+## Cheat Sheet Docker/Compose
+
+Liste non exhaustives des commandes "incontournables":
+
+## Utilisation quotidienne
+
+	docker-compose start # Démarre un service présent
+	docker-compose stop # Stop un service
+	docker-compose ps # Liste les "Multi-Docker" en cours
+	docker-compose up (-d) # Démarre un "Multi-Docker" (-d pour l'éxecution en arrière-plan)
+	docker-compose down # Stop un "Multi-Docker"
+	
+	docker ps -a # Affiche tous les docker présent sur le système
+	docker rm CONTAINER # Supprime un container
+	docker [start/stop]
+	
+	docker system prune -a # Supprime le de cache et les images de tous les container présent sur le système
+## Debug
+	
+	docker inspect CONTAINER # Affiche des infos sur le container
+	docker logs CONTAINER # Affiche les logs d'un container
+	
+## Info
+

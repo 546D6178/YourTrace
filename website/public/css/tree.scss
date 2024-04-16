@@ -1,0 +1,109 @@
+// Déclaration des variables
+$heightElem: 0.01rem;
+
+#tree_content {
+  margin-left: 1.5rem;
+  margin-top: 4rem;
+  min-height : 20rem;
+}
+
+ul.tree ul {
+  list-style-type: none;
+  padding-left: 1.5rem;
+  padding-top: 2rem;
+}
+
+/*
+Nous donnons à chaque élément 
+de liste (li) de la liste principale 
+une position relative. Cela nous permettra 
+de positionner les lignes de connexion 
+avec les pseudo-éléments ::before et ::after.
+ */
+ul.tree li {
+  position: relative;
+  padding: $heightElem 0 0 0;
+}
+
+/*
+Ici, nous utilisons le pseudo-élément ::before 
+pour créer une ligne de connexion verticale à 
+gauche de chaque élément de liste. Nous 
+utilisons une position absolue pour positionner 
+le pseudo-élément par rapport à son parent (li). 
+Les autres propriétés CSS définissent les styles 
+de la ligne : sa position (top: 0), son décalage 
+par rapport à l'élément de liste (left: -10px), 
+son épaisseur (border-left: 1px solid #000) et 
+sa hauteur égale à la hauteur de l'élément de 
+liste (height: 100%).
+ */
+ul.tree li:before {
+  content: "";
+  position: absolute;
+  top: -1.5rem;
+  left: -20px;
+  border-left: 2px solid #3f477a;
+  height: 100%;
+}
+
+/*
+Cette règle spéciale s'applique au dernier 
+élément de liste de chaque niveau. Nous 
+ajustons la hauteur du pseudo-élément ::before 
+à 50% pour créer une connexion partielle à mi-chemin.
+ */
+ul.tree li:last-child:before {
+  height: $heightElem * 150;
+}
+
+/*
+Nous utilisons ici le pseudo-élément 
+::after pour créer une ligne horizontale 
+à la fin du dernier élément de liste de 
+chaque niveau. Les propriétés CSS définissent 
+la position (top: 50%), le décalage (left: -10px), 
+le style de la ligne (border-top: 1px solid #000), 
+et la largeur de la ligne (width: 10px).
+ */
+ul.tree li:after {
+  content: "";
+  position: absolute;
+  top: $heightElem;
+  left: -20px;
+  border-top: 2px solid #3f477a;
+  width: 3rem;
+}
+
+ul.tree li{
+  display: block;
+  padding: 1rem;
+  margin-left: 2rem;
+  transform: translateY(-1.5rem);
+  font-weight: bold;
+  a{
+  display: block;
+  margin-left: 2rem;
+  transform: translateY(-1.5rem);
+
+  }
+}
+
+ul.tree {
+
+  .minor{
+    font-weight : 500;
+    opacity : 0;
+    margin-left: 3rem
+  }
+
+  .major{
+    padding: 0rem;
+    opacity : 0;
+    >a{
+      transform: translateY(-0.8rem);
+      margin-left: 3rem
+    }
+  }
+
+}

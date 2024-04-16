@@ -1,0 +1,41 @@
+@media screen and (max-width : 768px){
+
+  section.hero{
+    height : calc(100vh - 42px); // Hauteur du viewport
+    h1{
+      font-size: 5rem;
+    }
+    #yourtrace_info{
+      position: absolute;
+      top: 2rem;
+      right: -52%;
+      z-index: -1;
+      opacity: .35;
+    }
+    .wrapper{
+      flex-direction: column;
+    }
+  } 
+  .classic_form{
+    padding: 1rem;
+  }
+}
+
+
+
+@media screen and (max-width : 1000px) {
+  #content {
+    width: 30rem;
+  }
+
+  .options div:first-child {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .options div:first-child label {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+}

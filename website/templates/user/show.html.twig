@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Utilisateur{% endblock %}
+{% block bodyClass %}user_profile{% endblock %}
+{% block body %}
+<div id="content">
+<h1>{{user.name}} {{user.surname}}</h1>
+
+  <table class="table">
+    <tbody>
+      <tr>
+        <th>Id</th>
+        <td>{{ user.id }}</td>
+      </tr>
+      <tr>
+        <th>Email</th>
+        <td>{{ user.email }}</td>
+      </tr>
+      <tr>
+        <th>Pseudonyme</th>
+        <td>{{ user.username ? user.username : "Non renseigné" }}</td>
+      </tr>
+      <tr>
+        <th>Roles</th>
+        <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+      </tr>
+      <tr>
+        <th>Utilisateur vérifié</th>
+        <td>{{ user.isVerified ? 'Oui' : 'Non' }}</td>
+      </tr>
+      <tr>
+        <th>Date de naissance</th>
+        <td>{{ user.birthdate ? user.birthdate|date('Y-m-d') : 'Non renseignée' }}</td>
+      </tr>
+      <tr>
+        <th>Addesse postale</th>
+        <td>{{ user.address ? user.address : "Non renseignée"}}</td>
+      </tr>
+      <tr>
+        <th>Numéro de téléphone</th>
+        <td>{{ user.getPhoneNumber ? user.getPhoneNumber : "Non renseigné"}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="bottom_content">
+    {% if is_granted('ROLE_ADMIN') %}
+        <a class="main_btn small" href="{{ path('app_user_index') }}">Retour liste</a>
+    {% endif %}
+    <a class="main_btn small" href="{{ path('app_user_edit', {'id': user.id}) }}">Editer</a>
+    {{ include('user/_delete_form.html.twig') }}
+  </div>
+
+</div>
+{% endblock %}
