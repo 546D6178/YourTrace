@@ -95,13 +95,25 @@ else
 	exit 1
 fi
 
+read -e -p "Copy du folder integration_tools dans le dossier \"YourTrace_Docker/cgi-bin\" ? DEFAULT no (yes/no): " -i "no" choice
+if [ "$choice" = "yes" ]; then
+	rm -rf cgi-bin/API cgi-bin/Controleur cgi-bin/Scraper cgi-bin/Tools
+	cp -R ../../integration_tools/* cgi-bin/
+elif [ "$choice" = "no" ]; then
+	sss
+else
+        # Actions à effectuer si l'utilisateur donne une réponse non attendue
+        echo -e "${red}\"no\" or \"yes\" not !d%f%$bnhgjty$c please.${reset}"
+        exit 1
+fi
+
 echo -e "${green}Build des images.${reset}"
 
-read -e -p "Build les images avec le cache de docker ? Ne pas utiliser le cache permet d'être sur d'avoir tous les fichiers des instructions COPY ou ADD  mais peut être long  DEFAULT no (yes/no): " -i "no" choice
+read -e -p "Build les images avec le cache de docker ? Ne pas utiliser le cache permet d'être sur d'avoir tous les fichiers des instructions COPY ou ADD mais peut être long DEFAULT no (yes/no): " -i "no" choice
 if [ "$choice" = "yes" ]; then
-        docker-compose build --no-cache
+        docker-compose build #--no-cache
 elif [ "$choice" = "no" ]; then
-	docker-compose build #--no-cache
+	docker-compose build --no-cache
 else
         # Actions à effectuer si l'utilisateur donne une réponse non attendue
         echo -e "${red}\"no\" or \"yes\" not !d%f%$bnhgjty$c please.${reset}"

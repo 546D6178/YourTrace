@@ -28,7 +28,7 @@ RUN cd /etc/apache2/mods-enabled && ln -s ../mods-available/cgi.load \
     && /etc/init.d/apache2 restart
 
 # Git clone controleur
-COPY ./cgi-bin/* /usr/lib/cgi-bin/
+COPY ./cgi-bin/Controleur/ /usr/lib/cgi-bin/
 COPY ./src/Controleur/install.sh /root/
 
 #RIGHT MANA

@@ -45,7 +45,7 @@ RUN pip install typing_extensions==4.9.0 --upgrade
 #Holehe
 
 #RUN pip3 install holehe
-RUN git clone https://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@github.com/546D6178/holehe.git && \
+RUN git clone https://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@github.com/546D6178/holehe.git && \
     cd holehe/ && \
     python3 setup.py install
 
@@ -69,7 +69,7 @@ RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key
 RUN apt-get update && apt-get -y install google-chrome-stable
 
 #Add src File
-ADD ./cgi-bin/* /usr/lib/cgi-bin/
+COPY ./cgi-bin/ /usr/lib/cgi-bin/
 ADD ./src/Toolbox/chromium.sh /root/
 ADD ./src/Toolbox/install.sh /root/
 
