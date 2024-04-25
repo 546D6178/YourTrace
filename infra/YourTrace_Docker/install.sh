@@ -82,7 +82,33 @@ else
 	fi
 fi
 
-cp "sample.env" ".env"
+read -e -p "Copier le sample.env en .env dans le dossier INFRA ? " -i "dev" choice
+if [ "$choice" = "yes" ]; then
+	cp "sample.env" ".env"
+elif [ "$choice" = "no" ]; then
+	true
+else
+        # Actions à effectuer si l'utilisateur donne une réponse non attendue
+        echo -e "${red}\"no\" or \"yes\" not !d%f%$bnhgjty$c please.${reset}"
+        exit 1
+fi
+
+read -e -p "Copier le sample.env en .env dans le dossier WEBSITE ? " -i "dev" choice
+if [ "$choice" = "yes" ]; then
+	cp "../../website/sample.env" "../../website/.env"
+elif [ "$choice" = "no" ]; then
+	true
+else
+        # Actions à effectuer si l'utilisateur donne une réponse non attendue
+        echo -e "${red}\"no\" or \"yes\" not !d%f%$bnhgjty$c please.${reset}"
+        exit 1
+fi
+
+
+
+#cp "sample.env" ".env"
+
+
 
 read -e -p "Build l'image du website depuis quelle branche ? DEFAULT dev (main/dev): " -i "dev" choice
 if [ "$choice" = "main" ]; then
@@ -100,7 +126,7 @@ if [ "$choice" = "yes" ]; then
 	rm -rf cgi-bin/API cgi-bin/Controleur cgi-bin/Scraper cgi-bin/Tools
 	cp -R ../../integration_tools/* cgi-bin/
 elif [ "$choice" = "no" ]; then
-	sss
+	true
 else
         # Actions à effectuer si l'utilisateur donne une réponse non attendue
         echo -e "${red}\"no\" or \"yes\" not !d%f%$bnhgjty$c please.${reset}"

@@ -68,7 +68,7 @@ class SearchController extends AbstractController {
       // Initialisation de cURL
       $ch = curl_init($url);
       curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-      curl_setopt($ch, CURLOPT_TIMEOUT, 60); // Timeout après 10 secondes
+      curl_setopt($ch, CURLOPT_TIMEOUT, 120); // Timeout après 10 secondes
 
       $response = curl_exec($ch);
 
