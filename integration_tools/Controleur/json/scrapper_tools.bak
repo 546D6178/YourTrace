@@ -1,0 +1,3 @@
+
+
+{"linkedin_scraper":{"input":["name","lastname"],"url":"http://10.16.0.6/cgi-bin/Scraper/linkedin_scraper.py"},"instagram_scraper":{"input":["username"],"url":"http://10.16.0.6/cgi-bin/Scraper/instagram_scraper.py"},"pages_blanches_scraper":{"input":["name","lastname"],"url":"http://10.16.0.6/cgi-bin/Scraper/pages_blanches_scraper.py"},"github_scraper":{"input":["username"],"url":"http://10.16.0.6/cgi-bin/Scraper/github_scraper.py"},"discord_scraper":{"input":["username"],"url":"http://10.16.0.6/cgi-bin/Scraper/discord_scraper.py"},"duolingo_scraper":{"input":["username"],"url":"http://10.16.0.6/cgi-bin/Scraper/duolingo_scraper.py"}}

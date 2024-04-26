@@ -23,10 +23,12 @@ import traceback
 
 print("Content-type: text/html\n")
 
+import undetected_chromedriver as uc
+"""
 def chrome(headless=False):
     # support to get response status and headers
     d = webdriver.DesiredCapabilities.CHROME
-   # d['loggingPrefs'] = {'performance': 'ALL'}
+    #d['loggingPrefs'] = {'performance': 'ALL'}
     opt = webdriver.ChromeOptions()
     if headless:
         opt.add_argument("--headless")
@@ -35,13 +37,33 @@ def chrome(headless=False):
     opt.add_argument("--disable-dev-shm-usage")
     opt.add_experimental_option('excludeSwitches', ['enable-logging'])
     opt.add_argument("--disable-popup-blocking")
-    opt.add_argument('./plugin.zip')
-    opt.binary_location = "/usr/bin/google-chrome-stable"######
+    opt.binary_location = "/usr/bin/google-chrome-stable"
     #try: 
     #    browser = webdriver.Chrome(service=Service('/chromedriver/stable/chromedriver-linux64/chromedriver'), use_subprocess=True,options=opt)
     #except NoSuchDriverException:
-    browser = webdriver.Chrome(service=Service('/chromedriver/stable/chromedriver'), use_subprocess=True,options=opt)
+    browser = webdriver.Chrome(service=Service('/chromedriver/stable/chromedriver'),options=opt)
     
+    browser.implicitly_wait(10)
+    return browser
+"""
+def chrome(headless=False):
+    # support to get response status and headers
+#    d = uc.DesiredCapabilities.CHROME
+#    d['loggingPrefs'] = {'performance': 'ALL'}
+
+    opt = uc.ChromeOptions()
+    if headless:
+        opt.add_argument("--headless")
+    opt.add_argument("--remote-debugging-port=9222")
+    opt.add_argument('--no-sandbox')
+    opt.add_argument('--disable-gpu')
+    opt.add_argument('--disable-dev-shm-usage')
+    opt.add_argument("--disable-popup-blocking")
+    opt.binary_location = "/usr/bin/google-chrome-stable"
+    #try: 
+    #    browser = uc.Chrome(service=Service('/chromedriver/stable/chromedriver-linux64/chromedriver'), use_subprocess=True,options=opt)
+    #except NoSuchDriverException:
+    browser = uc.Chrome(service=Service('/chromedriver/stable/chromedriver'), use_subprocess=True,options=opt)
     browser.implicitly_wait(10)
     return browser
 

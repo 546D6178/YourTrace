@@ -39,7 +39,11 @@ RUN pip3 install ignorant
 
 #Maigret
 
-RUN pip3 install maigret
+#RUN pip3 install maigret
+RUN git clone https://github.com/soxoj/maigret.git && \
+    cd maigret && pip3 install -r requirements.txt && \
+    python3 setup.py build && python3 setup.py install
+    
 RUN pip install typing_extensions==4.9.0 --upgrade
 
 #Holehe

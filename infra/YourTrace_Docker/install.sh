@@ -82,7 +82,7 @@ else
 	fi
 fi
 
-read -e -p "Copier le sample.env en .env dans le dossier INFRA ? " -i "dev" choice
+read -e -p "Copier le sample.env en .env dans le dossier INFRA ? (yes/no) " -i "yes" choice
 if [ "$choice" = "yes" ]; then
 	cp "sample.env" ".env"
 elif [ "$choice" = "no" ]; then
@@ -93,7 +93,7 @@ else
         exit 1
 fi
 
-read -e -p "Copier le sample.env en .env dans le dossier WEBSITE ? " -i "dev" choice
+read -e -p "Copier le sample.env en .env dans le dossier WEBSITE ? (yes/no) " -i "yes" choice
 if [ "$choice" = "yes" ]; then
 	cp "../../website/sample.env" "../../website/.env"
 elif [ "$choice" = "no" ]; then
