@@ -49,9 +49,7 @@ RUN pip install typing_extensions==4.9.0 --upgrade
 #Holehe
 
 RUN pip3 install holehe
-#RUN git clone https://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@github.com/546D6178/holehe.git && \
-#    cd holehe/ && \
-#    python3 setup.py install
+
 
 
 #h8mail
