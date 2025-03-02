@@ -12,16 +12,26 @@ C'est donc de cette motivation de contrôler cette partie immergée de l'iceberg
 
 ## 📂 Structure du projet
 
-Le projet est organisé en trois parties :
-
-🛠️ Integration_tools/ : Outils pour l'intégration, comprenant des outils publics, des scrapers, et notre contrôleur de requêtes.
-🐳 Infra/ – Infrastructure : Contient le fonctionnement de notre infrastructure (Docker-compose, Dockerfile, Supervisor) ainsi que de la documentation.
-🌐 website/ – Site web : Toutes les sources requises pour le fonctionnement de notre site web.
-
+Le projet est organisé en trois parties :  
+  
+🛠️ Integration_tools/ : Outils pour l'intégration, comprenant des outils publics, des scrapers, et notre contrôleur de requêtes.  
+🐳 Infra/ – Infrastructure : Contient le fonctionnement de notre infrastructure (Docker-compose, Dockerfile, Supervisor) ainsi que de la documentation.  
+🌐 website/ – Site web : Toutes les sources requises pour le fonctionnement de notre site web.  
 
 ### 📖 Documentation
 
-Chaque dossier contient son propre README.md avec plus de détails :
-📌 [Integration_tools](./integration_tools/README.md)
-📌 [Infra](./infra/YourTrace_Docker/README.md)
-📌 [Website](./website/README.md)
+Chaque dossier contient son propre README.md avec plus de détails :  
+📌 [Integration_tools](./integration_tools/README.md)  
+📌 [Infra](./infra/YourTrace_Docker/README.md)  
+📌 [Website](./website/README.md)  
+
+
+## Contributeur 
+
+[Guerisan](https://github.com/Guerisan)
+[gentilkoala](https://github.com/gentilkoala)
+[alexis-chlm](https://github.com/alexis-chlm)
+[y4m373](https://github.com/y4m373)
+Thomas D.
+Yanis C.
+Maxime S. 
